@@ -8,5 +8,17 @@
         android:id="@+id/mainFragment"
         android:name="com.example.trabalho_final_v2.MainFragment"
         android:label="fragment_Main"
-        tools:layout="@layout/fragment_Main" />
+        tools:layout="@layout/fragment_Main" >
+        <action
+            android:id="@+id/action_mainFragment_to_listaVacinasFragment"
+            app:destination="@id/listaVacinasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaVacinasFragment"
+        android:name="com.example.trabalho_final_v2.ListaVacinasFragment"
+        android:label="ListaVacinasFragment" >
+        <action
+            android:id="@+id/action_listaVacinasFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

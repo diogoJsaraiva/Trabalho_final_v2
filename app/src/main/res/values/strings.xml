@@ -9,4 +9,15 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="button">Button</string>
+    <string name="vacinas">Vacinas</string>
+    <string name="utentes">Utentes</string>
+    <string name="covid_app">Covid APP</string>
+    <string name="pfizer">Pfizer</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="guardar">Guardar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="nova_vacina">Nova Vacina</string>
+    <string name="editar_vacina">Editar Vacina</string>
+    <string name="eliminar_vacina">Eliminar Vacina</string>
 </resources>
