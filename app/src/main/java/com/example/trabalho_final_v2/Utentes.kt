@@ -6,7 +6,7 @@ import android.provider.BaseColumns
 import java.util.*
 
 
-data class Utentes(var id: Long = -1, var nome: String, var telefone: String, var contribuinte: Int, var dataNascimento: Date, var dose: Int) {
+data class Utentes(var id: Long = -1, var nome: String, var telefone: String, var contribuinte: Int, var dataNascimento: Date, var dose: Int , var vacina : Long) {
     fun toContentValues(): ContentValues {
         val valores = ContentValues().apply {
             put(TabelaUtentes.CAMPO_NOME, nome)
@@ -14,6 +14,7 @@ data class Utentes(var id: Long = -1, var nome: String, var telefone: String, va
             put(TabelaUtentes.CAMPO_CONTRIBUINTE, contribuinte)
             put(TabelaUtentes.CAMPO_DATA_NASCIMENTO, dataNascimento.time)
             put(TabelaUtentes.CAMPO_DOSE, dose)
+            put(TabelaUtentes.CAMPO_ID_VACINAS, vacina)
         }
 
         return valores
@@ -27,6 +28,8 @@ data class Utentes(var id: Long = -1, var nome: String, var telefone: String, va
             val colContribuinte = cursor.getColumnIndex(TabelaUtentes.CAMPO_CONTRIBUINTE)
             val colDataNascimento = cursor.getColumnIndex(TabelaUtentes.CAMPO_DATA_NASCIMENTO)
             val colDose = cursor.getColumnIndex(TabelaUtentes.CAMPO_DOSE)
+            val colVacina = cursor.getColumnIndex(TabelaUtentes.CAMPO_ID_VACINAS)
+
 
             val id = cursor.getLong(colId)
             val nome = cursor.getString(colNome)
@@ -34,8 +37,9 @@ data class Utentes(var id: Long = -1, var nome: String, var telefone: String, va
             val contribuinte = cursor.getInt(colContribuinte)
             val dataNascimento = cursor.getLong(colDataNascimento)
             val dose = cursor.getInt(colDose)
+            val vacina = cursor.getLong(colVacina)
 
-            return Utentes(id, nome, telefone, contribuinte, Date(dataNascimento), dose)
+            return Utentes(id, nome, telefone, contribuinte, Date(dataNascimento), dose,vacina)
         }
     }
 }

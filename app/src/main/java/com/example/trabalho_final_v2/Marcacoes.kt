@@ -5,7 +5,7 @@ import android.database.Cursor
 import android.provider.BaseColumns
 import java.util.*
 
-data class Marcacoes (var id: Long = -1, var data: Date, var idUtentes: Long, var dose: Int){
+data class Marcacoes (var id: Long = -1, var data: Date, var dose: Int ,var idUtentes: Long){
     fun toContentValues(): ContentValues {
         val valores = ContentValues().apply {
             put(TabelaMarcacoes.CAMPO_DATA, data.time)
@@ -26,10 +26,11 @@ data class Marcacoes (var id: Long = -1, var data: Date, var idUtentes: Long, va
 
             val id = cursor.getLong(colId)
             val data = cursor.getLong(colData)
+            val dose = cursor.getInt(colIdDose)
             val idUtentes = cursor.getLong(colIdUtentes)
-            val Dose = cursor.getInt(colIdDose)
 
-            return Marcacoes(id, Date(data), idUtentes, Dose)
+
+            return Marcacoes(id, Date(data),dose, idUtentes)
         }
     }
 }

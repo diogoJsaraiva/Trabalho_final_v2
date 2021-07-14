@@ -8,7 +8,7 @@ import android.provider.BaseColumns
 class TabelaMarcacoes(db: SQLiteDatabase) : BaseColumns {
     private val db : SQLiteDatabase = db
     fun cria() = db?.execSQL(
-        "CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_DATA INTEGER NOT NULL, $CAMPO_DOSE INTEGER NOT NULL,$CAMPO_ID_UTENTES INTEGER NOT NULL, FOREIGN KEY ($CAMPO_ID_UTENTES) REFERENCES ${TabelaUtentes.NOME_TABELA})"
+        "CREATE TABLE $NOME_TABELA (${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT, $CAMPO_DATA INTEGER NOT NULL,  $CAMPO_DOSE INTEGER NOT NULL,$CAMPO_ID_UTENTES INTEGER NOT NULL, FOREIGN KEY ($CAMPO_ID_UTENTES) REFERENCES ${TabelaUtentes.NOME_TABELA})"
     )
 
     fun insert(values: ContentValues): Long {
@@ -42,7 +42,7 @@ class TabelaMarcacoes(db: SQLiteDatabase) : BaseColumns {
 
 
 
-        val TODOS_CAMPOS =arrayOf(BaseColumns._ID, CAMPO_DATA,CAMPO_ID_UTENTES)
+        val TODOS_CAMPOS =arrayOf(BaseColumns._ID, CAMPO_DATA,CAMPO_ID_UTENTES, CAMPO_DOSE)
 
     }
 
