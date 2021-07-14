@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var menu: Menu
-    var menuAtual = R.menu.menu_lista_vacinas
+    var menuAtual = R.menu.menu_main
         set(value) {
 
             field = value
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(menuAtual, menu)
         this.menu = menu
-        if (menuAtual == R.menu.menu_lista_vacinas) {
+        if (menuAtual == R.menu.menu_main) {
             atualizaMenuListaMARCACOES(false)
         }
         return true
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> when (menuAtual) {
-                R.menu.menu_lista_vacinas -> (DadosApp.fragment as ListaVacinasFragment).processaOpcaoMenu(
+                R.menu.menu_main -> (DadosApp.fragment as ListaVacinasFragment).processaOpcaoMenu(
                     item
                 )
                 else -> false
@@ -59,8 +59,8 @@ class MainActivity : AppCompatActivity() {
 
 
     fun atualizaMenuListaMARCACOES(permiteAlterarEliminar: Boolean) {
-        menu.findItem(R.id.action_eliminar_vacina).setVisible(permiteAlterarEliminar)
-        menu.findItem(R.id.action_editar_vacina).setVisible(permiteAlterarEliminar)
+        menu.findItem(R.id.action_marcacoes).setVisible(permiteAlterarEliminar)
+        menu.findItem(R.id.action_utentes).setVisible(permiteAlterarEliminar)
 
     }
 }

@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -70,9 +69,9 @@ class ListaVacinasFragment  : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
 
     fun processaOpcaoMenu(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_nova_vacina -> navegaNovaMarcacoes()
-            R.id.action_eliminar_vacina -> navegaEliminarMarcacoes()
-            R.id.action_eliminar_vacina -> navegaAlterarMarcacoes()
+            R.id.action_vacina -> navegaNovaMarcacoes()
+            R.id.action_marcacoes -> navegaEliminarMarcacoes()
+            R.id.action_marcacoes -> navegaAlterarMarcacoes()
             else -> return false
         }
         return true
