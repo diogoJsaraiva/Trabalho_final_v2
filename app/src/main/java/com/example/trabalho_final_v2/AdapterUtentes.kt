@@ -48,7 +48,7 @@ class AdapterUtentes (val fragment: ListaUtentesFragment) : RecyclerView.Adapter
 
         private fun seleciona() {
             selecionado = this
-            itemView.setBackgroundResource(R.color.cor_destaque)
+            itemView.setBackgroundResource(R.color.cor_selecao)
             DadosApp.utentesSelecionado = utentes
             DadosApp.activity.atualizaMenuListaUtentes(true)
         }

@@ -67,7 +67,7 @@ class ListaVacinasFragment  : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
     }
 
     private fun navegaEliminarVacina(){
-     //   findNavController().navigate(R.id.action_Lista_MarcacoesFragment_to_eliminaPessoaFragment)
+        findNavController().navigate(R.id.action_listaVacinasFragment_to_eliminaVacinasFragment)
     }
 
 
@@ -79,7 +79,7 @@ class ListaVacinasFragment  : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
     fun processaOpcaoMenu(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_adicionar_vacina -> navegaNovaVacina()
-            R.id.action_eliminar_vacina -> navegaAlterarVacina()
+            //R.id.action_eliminar_vacina -> navegaAlterarVacina()
             R.id.action_eliminar_vacina -> navegaEliminarVacina()
             else -> return false
         }

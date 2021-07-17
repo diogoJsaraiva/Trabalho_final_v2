@@ -35,6 +35,7 @@ class NovaVacinasFragment : Fragment() {
 
     }
 
+
     fun navegaListaVacinas(){
        findNavController().navigate(R.id.action_novaVacinasFragment_to_listaVacinasFragment)
     }
@@ -67,7 +68,7 @@ class NovaVacinasFragment : Fragment() {
             Toast.LENGTH_LONG
         ).show()
         return
-
+        navegaListaVacinas()
 
     }
 
