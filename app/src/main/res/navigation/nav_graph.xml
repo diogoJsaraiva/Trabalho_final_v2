@@ -8,10 +8,13 @@
         android:id="@+id/mainFragment"
         android:name="com.example.trabalho_final_v2.MainFragment"
         android:label="fragment_Main"
-        tools:layout="@layout/fragment_Main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_listaVacinasFragment"
             app:destination="@id/listaVacinasFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_listaUtentesFragment"
+            app:destination="@id/listaUtentesFragment" />
     </fragment>
     <fragment
         android:id="@+id/listaVacinasFragment"
@@ -20,5 +23,21 @@
         <action
             android:id="@+id/action_listaVacinasFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_listaVacinasFragment_to_novaVacinasFragment"
+            app:destination="@id/novaVacinasFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/novaVacinasFragment"
+        android:name="com.example.trabalho_final_v2.NovaVacinasFragment"
+        android:label="fragment_novas_vacinas"
+        tools:layout="@layout/fragment_novas_vacinas" >
+        <action
+            android:id="@+id/action_novaVacinasFragment_to_listaVacinasFragment"
+            app:destination="@id/listaVacinasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaUtentesFragment"
+        android:name="com.example.trabalho_final_v2.ListaUtentesFragment"
+        android:label="ListaUtentesFragment" />
 </navigation>

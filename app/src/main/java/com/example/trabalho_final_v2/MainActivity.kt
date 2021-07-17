@@ -30,9 +30,10 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(menuAtual, menu)
         this.menu = menu
-        if (menuAtual == R.menu.menu_main) {
-            atualizaMenuListaMARCACOES(false)
+        if (menuAtual == R.menu.menu_lista_vacinas) {
+            atualizaMenuListaVacinas(false)
         }
+
         return true
     }
 
@@ -42,13 +43,14 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         val opcaoProcessada = when (item.itemId) {
             R.id.action_settings -> {
-                Toast.makeText(this, "PEssoas v.1.0", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Pessoas v.1.0", Toast.LENGTH_LONG).show()
                 true
             }
             else -> when (menuAtual) {
-                R.menu.menu_main -> (DadosApp.fragment as ListaVacinasFragment).processaOpcaoMenu(
-                    item
-                )
+                R.menu.menu_lista_vacinas -> (DadosApp.fragment as ListaVacinasFragment).processaOpcaoMenu(item)
+                R.menu.menu_nova_vacina -> (DadosApp.fragment as NovaVacinasFragment).processaOpcaoMenu(item)
+                R.menu.menu_lista_utentes -> (DadosApp.fragment as ListaUtentesFragment).processaOpcaoMenu(item)
+
                 else -> false
             }
 
@@ -58,9 +60,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun atualizaMenuListaMARCACOES(permiteAlterarEliminar: Boolean) {
-        menu.findItem(R.id.action_marcacoes).setVisible(permiteAlterarEliminar)
-        menu.findItem(R.id.action_utentes).setVisible(permiteAlterarEliminar)
+    fun atualizaMenuListaVacinas(permiteAlterarEliminar: Boolean) {
+        menu.findItem(R.id.action_eliminar_vacina).setVisible(permiteAlterarEliminar)
+        menu.findItem(R.id.action_editar_vacina).setVisible(permiteAlterarEliminar)
+
+    }
+    fun atualizaMenuListaUtentes(permiteAlterarEliminar: Boolean) {
+        //menu.findItem(R.id.action_eliminar_vacina).setVisible(permiteAlterarEliminar)
+        //menu.findItem(R.id.action_editar_vacina).setVisible(permiteAlterarEliminar)
 
     }
 }

@@ -19,7 +19,7 @@ import java.util.*
  */
 @RunWith(AndroidJUnit4::class)
 class TesteBaseDados {
-   private fun getAppContext() = InstrumentationRegistry.getInstrumentation().targetContext
+    private fun getAppContext() = InstrumentationRegistry.getInstrumentation().targetContext
     private fun getBDMarcacoesOpenHelper() = BDMarcacoesOpenHelper(getAppContext())
 
     private fun getTabelaUtentes(db: SQLiteDatabase) = TabelaUtentes(db)
@@ -91,7 +91,7 @@ class TesteBaseDados {
 
     @Before
     fun apagaBaseDados() {
-        //getAppContext().deleteDatabase(BDMarcacoesOpenHelper.NOME_BASE_DADOS)
+        getAppContext().deleteDatabase(BDMarcacoesOpenHelper.NOME_BASE_DADOS)
     }
 
     @Test

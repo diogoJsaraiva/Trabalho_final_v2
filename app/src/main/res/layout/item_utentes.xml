@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewNome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margem_campos"
+        android:layout_marginLeft="@dimen/margem_campos"
+        android:layout_marginTop="@dimen/margem_campos"
+        android:layout_marginEnd="@dimen/margem_campos"
+        android:layout_marginRight="@dimen/margem_campos"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/textViewDose"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Diogo Saraiva" />
+
+    <TextView
+        android:id="@+id/textViewIdade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="@dimen/margem_campos"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#424040"
+        app:layout_constraintStart_toStartOf="@+id/textViewNome"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNome"
+        tools:text="Idade: 20/10/200" />
+
+    <TextView
+        android:id="@+id/textViewDose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/margem_campos"
+        android:layout_marginRight="@dimen/margem_campos"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/cor_destaque"
+        android:textColorHint="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Doses: 0" />
+
+    <TextView
+        android:id="@+id/textViewTelefone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#424040"
+        app:layout_constraintStart_toEndOf="@+id/textViewIdade"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNome"
+        tools:text="Telefone: +355 987453568" />
+
+    <TextView
+        android:id="@+id/textViewContribuinte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewTelefone"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNome"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="12345678901" />
+</androidx.constraintlayout.widget.ConstraintLayout>

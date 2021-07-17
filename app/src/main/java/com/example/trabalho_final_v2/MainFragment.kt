@@ -25,7 +25,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button_Utentes).setOnClickListener {
-            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_mainFragment_to_listaUtentesFragment)
 
         }
         view.findViewById<Button>(R.id.button_Marcacao).setOnClickListener {

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class AdapterVacinas(val fragment: ListaVacinasFragment) : RecyclerView.Adapter<AdapterVacinas.ViewHolderVacinas>()  {
+class AdapterUtentes (val fragment: ListaUtentesFragment) : RecyclerView.Adapter<AdapterUtentes.ViewHolderUtentes>()  {
     public var cursor: Cursor? = null
         get() = field
         set(value) {
@@ -14,19 +14,26 @@ class AdapterVacinas(val fragment: ListaVacinasFragment) : RecyclerView.Adapter<
             notifyDataSetChanged()
         }
 
-    class ViewHolderVacinas(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        private val textViewNome = itemView.findViewById<TextView>(R.id.textViewNomeVacina)
-        private lateinit var vacinas: Vacinas
+    class ViewHolderUtentes(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+        private val textViewNome = itemView.findViewById<TextView>(R.id.textViewNome)
+        private val textViewDose = itemView.findViewById<TextView>(R.id.textViewDose)
+        private val textViewIdade = itemView.findViewById<TextView>(R.id.textViewIdade)
+        private val textViewTelefone = itemView.findViewById<TextView>(R.id.textViewTelefone)
+        private val textviewContribuinte = itemView.findViewById<TextView>(R.id.textViewContribuinte)
+        private lateinit var utentes: Utentes
 
         init {
             itemView.setOnClickListener(this)
         }
 
-        fun atualizaVacinas(vacinas: Vacinas) {
-            this.vacinas = vacinas
+        fun atualizaUtentes(utentes: Utentes) {
+            this.utentes = utentes
 
-            textViewNome.text = vacinas.nomeVacina
-
+            textViewNome.text = utentes.nome
+            textViewDose.text = utentes.dose.toString()
+            textViewIdade.text = utentes.dataNascimento.toString()
+            textViewTelefone.text = utentes.telefone
+            textviewContribuinte.text = utentes.contribuinte.toString()
         }
 
         /**
@@ -41,9 +48,9 @@ class AdapterVacinas(val fragment: ListaVacinasFragment) : RecyclerView.Adapter<
 
         private fun seleciona() {
             selecionado = this
-            itemView.setBackgroundResource(R.color.cor_selecao)
-            DadosApp.vacinasSelecionado = vacinas
-            DadosApp.activity.atualizaMenuListaVacinas(true)
+            itemView.setBackgroundResource(R.color.cor_destaque)
+            DadosApp.utentesSelecionado = utentes
+            DadosApp.activity.atualizaMenuListaUtentes(true)
         }
 
         private fun desSeleciona() {
@@ -54,7 +61,7 @@ class AdapterVacinas(val fragment: ListaVacinasFragment) : RecyclerView.Adapter<
 
 
         companion object {
-            var selecionado : ViewHolderVacinas? = null
+            var selecionado : ViewHolderUtentes? = null
         }
     }
 
@@ -81,10 +88,10 @@ class AdapterVacinas(val fragment: ListaVacinasFragment) : RecyclerView.Adapter<
      * @see .getItemViewType
      * @see .onBindViewHolder
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderVacinas {
-        val itemUtentes = fragment.layoutInflater.inflate(R.layout.item_vacinas, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderUtentes {
+        val itemUtentes = fragment.layoutInflater.inflate(R.layout.item_utentes, parent, false)
 
-        return ViewHolderVacinas(itemUtentes)
+        return ViewHolderUtentes(itemUtentes)
     }
 
     /**
@@ -108,9 +115,9 @@ class AdapterVacinas(val fragment: ListaVacinasFragment) : RecyclerView.Adapter<
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: ViewHolderVacinas, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderUtentes, position: Int) {
         cursor!!.moveToPosition(position)
-        holder.atualizaVacinas(Vacinas.fromCursor(cursor!!))
+        holder.atualizaUtentes(Utentes.fromCursor(cursor!!))
     }
 
     /**

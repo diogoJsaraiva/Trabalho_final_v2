@@ -3,19 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_adicionar_vacina"
+        android:id="@+id/action_adicionar_utentes"
         android:icon="@android:drawable/ic_input_add"
-        android:title="@string/nova_vacina"
+        android:title="@string/novo_utente"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_editar_vacina"
+        android:id="@+id/action_editar_utentes"
         android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/editar_vacina"
+        android:title="@string/editar_utente"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_eliminar_vacina"
+        android:id="@+id/action_eliminar_utentes"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/eliminar_vacina"
+        android:title="@string/eliminar_utente"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"

@@ -7,5 +7,6 @@ class DadosApp {
         lateinit var activity: MainActivity
         lateinit var fragment: Fragment
         var vacinasSelecionado : Vacinas? = null
+        var utentesSelecionado : Utentes? = null
     }
 }
