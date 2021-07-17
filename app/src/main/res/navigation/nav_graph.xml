@@ -26,6 +26,12 @@
         <action
             android:id="@+id/action_listaVacinasFragment_to_novaVacinasFragment"
             app:destination="@id/novaVacinasFragment" />
+        <action
+            android:id="@+id/action_listaVacinasFragment_to_eliminaVacinasFragment"
+            app:destination="@id/eliminaVacinasFragment" />
+        <action
+            android:id="@+id/action_listaVacinasFragment_to_editarVacinasFragment"
+            app:destination="@id/editarVacinasFragment" />
     </fragment>
     <fragment
         android:id="@+id/novaVacinasFragment"
@@ -40,4 +46,21 @@
         android:id="@+id/listaUtentesFragment"
         android:name="com.example.trabalho_final_v2.ListaUtentesFragment"
         android:label="ListaUtentesFragment" />
+    <fragment
+        android:id="@+id/eliminaVacinasFragment"
+        android:name="com.example.trabalho_final_v2.EliminaVacinasFragment"
+        android:label="fragment_elimina_vacina"
+        tools:layout="@layout/fragment_elimina_vacina" >
+        <action
+            android:id="@+id/action_eliminaVacinasFragment_to_listaVacinasFragment"
+            app:destination="@id/listaVacinasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarVacinasFragment"
+        android:name="com.example.trabalho_final_v2.EditarVacinasFragment"
+        android:label="EditarVacinasFragment" >
+        <action
+            android:id="@+id/action_editarVacinasFragment_to_listaVacinasFragment"
+            app:destination="@id/listaVacinasFragment" />
+    </fragment>
 </navigation>

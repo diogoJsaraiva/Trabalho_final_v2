@@ -23,5 +23,6 @@
     <string name="novo_utente">novo_utente</string>
     <string name="editar_utente">editar utente</string>
     <string name="eliminar_utente">eliminar utente</string>
+    <string name="nome">Nome</string>
 
 </resources>
