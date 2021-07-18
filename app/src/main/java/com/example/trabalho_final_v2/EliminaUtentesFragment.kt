@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
 class EliminaUtentesFragment: Fragment() {
-    private  lateinit var  textViewNome: TextView
+
+    private lateinit var textViewNome: TextView
+    private lateinit var textViewTelefone: TextView
+    private lateinit var textViewContribuinte: TextView
+    private lateinit var textViewDose: TextView
+    private lateinit var textViewDataNascimento: TextView
+
+    private lateinit var textViewDataVacina: TextView
 
 
 
@@ -31,10 +37,21 @@ class EliminaUtentesFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        textViewNome = view.findViewById(R.id.textViewNomeElimina)
-
+        textViewNome = view.findViewById(R.id.textViewNome)
+        textViewTelefone = view.findViewById(R.id.textViewTelefone)
+        textViewContribuinte = view.findViewById(R.id.textViewContribuinte)
+        textViewDose = view.findViewById(R.id.textViewDose)
+        textViewDataNascimento = view.findViewById(R.id.textViewIdade)
+        textViewDataVacina =view.findViewById(R.id.TextViewVacina)
 
         textViewNome.setText(DadosApp.utentesSelecionado!!.nome)
+        textViewTelefone.setText(DadosApp.utentesSelecionado!!.telefone)
+        textViewContribuinte.setText(DadosApp.utentesSelecionado!!.contribuinte.toString())
+        val dose = "Dose: ${DadosApp.utentesSelecionado!!.dose.toString()}"
+        textViewDose.setText(dose)
+        textViewDataNascimento.setText(DadosApp.utentesSelecionado!!.dataNascimento.toString())
+        textViewDataVacina.setText(DadosApp.utentesSelecionado!!.nomeVacina)
+
 
 
     }
@@ -44,7 +61,7 @@ class EliminaUtentesFragment: Fragment() {
 
     fun processaOpcaoMenu(item: MenuItem):Boolean{
         when(item.itemId) {
-            R.id.action_confirma_eliminar_utente -> eliminaVacina()
+            R.id.action_confirma_eliminar_utente -> eliminaUtentes()
             R.id.action_cancelar_eliminar_utente -> navegaListaVacinas()
             else -> return false
 
@@ -52,7 +69,7 @@ class EliminaUtentesFragment: Fragment() {
         return true
     }
 
-    private fun eliminaVacina() {
+    private fun eliminaUtentes() {
         val urilivro = Uri.withAppendedPath(
             ContentProviderMarcacoes.ENDERECO_UTENTES,
             DadosApp.utentesSelecionado!!.id.toString()
