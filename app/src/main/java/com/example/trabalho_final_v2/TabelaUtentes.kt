@@ -66,7 +66,7 @@ class TabelaUtentes (db: SQLiteDatabase) : BaseColumns {
             if (having != null) " HAVING $having"
         }
 
-        if (orderBy != null) sql += " ORDER BY $orderBy"
+        if (orderBy != null) sql += " ORDER BY $NOME_TABELA.$orderBy"
 
         return db.rawQuery(sql, selectionArgs)
     }
@@ -81,7 +81,7 @@ class TabelaUtentes (db: SQLiteDatabase) : BaseColumns {
         const val CAMPO_ID_VACINAS = "id_vacina"
         const val CAMPO_EXTERNO_NOME_VACINA = "nomevacina"
 
-        val TODOS_CAMPOS =arrayOf(BaseColumns._ID, CAMPO_NOME, CAMPO_TELEFONE, CAMPO_CONTRIBUINTE,CAMPO_DATA_NASCIMENTO, CAMPO_DOSE,CAMPO_ID_VACINAS)
+        val TODOS_CAMPOS =arrayOf(BaseColumns._ID, CAMPO_NOME, CAMPO_TELEFONE, CAMPO_CONTRIBUINTE,CAMPO_DATA_NASCIMENTO, CAMPO_DOSE,CAMPO_ID_VACINAS, CAMPO_EXTERNO_NOME_VACINA)
     }
 
 }
