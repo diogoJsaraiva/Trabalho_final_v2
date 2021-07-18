@@ -30,7 +30,47 @@ class TabelaUtentes (db: SQLiteDatabase) : BaseColumns {
         having: String?,
         orderBy: String?
     ): Cursor? {
-        return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy)
+        val ultimaColuna = columns.size -1
+
+        var posCampoNomeCidade = -1 //-1 indica que não foi pedido
+        for (i in 0..ultimaColuna){
+            if (columns[i] == CAMPO_EXTERNO_NOME_VACINA){
+                posCampoNomeCidade = i
+                break
+            }
+        }
+
+        if (posCampoNomeCidade == -1) { // não existem campos externos de outra tabela
+            return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy)
+        }
+
+        var colunas = ""
+        for(i in 0..ultimaColuna){
+            var nomeColuna = if(i == posCampoNomeCidade){
+                "${TabelaVacinas.NOME_TABELA}.${TabelaVacinas.CAMPO_NOME} AS $CAMPO_EXTERNO_NOME_VACINA"
+            }else {
+                "$NOME_TABELA.${columns[i]}"
+            }
+
+            if (i > 0) colunas += ","
+            colunas += nomeColuna
+        }
+        val tabelas = "$NOME_TABELA INNER JOIN ${TabelaVacinas.NOME_TABELA} ON ${TabelaVacinas.NOME_TABELA}.${BaseColumns._ID} = $NOME_TABELA.$CAMPO_ID_VACINAS"
+
+        var sqlAdicional = ""
+
+        if (selection != null) sqlAdicional += " WHERE $selection"
+
+        if (groupBy != null) {
+            sqlAdicional += " GROUP BY $groupBy"
+            if (having != null) sqlAdicional += " HAVING $having"
+        }
+        if (orderBy != null){
+            sqlAdicional += " ORDER BY $orderBy"
+        }
+
+        val sql = "SELECT $colunas FROM $tabelas$sqlAdicional"
+        return db.rawQuery(sql, selectionArgs)
     }
 
     companion object{

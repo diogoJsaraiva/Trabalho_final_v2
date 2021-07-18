@@ -60,7 +60,7 @@ class ListaUtentesFragment  : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
     }
 
     fun navegaNovoUtente(){
-        //findNavController().navigate(R.id.action_mainFragment_to_listaUtentesFragment)
+        findNavController().navigate(R.id.action_listaUtentesFragment_to_novoUtentesFragment)
     }
     private fun navegaAlterarUtente(){
         //  findNavController().navigate(R.id.action_Lista_MarcacoesFragment_to_editaPessoaFragment)
@@ -78,9 +78,9 @@ class ListaUtentesFragment  : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
 
     fun processaOpcaoMenu(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_adicionar_vacina -> navegaNovoUtente()
-            R.id.action_eliminar_vacina -> navegaAlterarUtente()
-            R.id.action_eliminar_vacina -> navegaEliminarUtente()
+            R.id.action_adicionar_utentes -> navegaNovoUtente()
+            R.id.action_editar_utentes -> navegaAlterarUtente()
+            R.id.action_eliminar_utentes -> navegaEliminarUtente()
             else -> return false
         }
         return true

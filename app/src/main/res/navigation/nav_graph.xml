@@ -45,7 +45,11 @@
     <fragment
         android:id="@+id/listaUtentesFragment"
         android:name="com.example.trabalho_final_v2.ListaUtentesFragment"
-        android:label="ListaUtentesFragment" />
+        android:label="ListaUtentesFragment" >
+        <action
+            android:id="@+id/action_listaUtentesFragment_to_novoUtentesFragment"
+            app:destination="@id/novoUtentesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/eliminaVacinasFragment"
         android:name="com.example.trabalho_final_v2.EliminaVacinasFragment"
@@ -62,5 +66,14 @@
         <action
             android:id="@+id/action_editarVacinasFragment_to_listaVacinasFragment"
             app:destination="@id/listaVacinasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/novoUtentesFragment"
+        android:name="com.example.trabalho_final_v2.NovoUtentesFragment"
+        android:label="fragment_novo_utentes"
+        tools:layout="@layout/fragment_novo_utentes" >
+        <action
+            android:id="@+id/action_novoUtentesFragment_to_listaUtentesFragment"
+            app:destination="@id/listaUtentesFragment" />
     </fragment>
 </navigation>

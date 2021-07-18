@@ -6,7 +6,7 @@ import android.provider.BaseColumns
 import java.util.*
 
 
-data class Utentes(var id: Long = -1, var nome: String, var telefone: String, var contribuinte: Int, var dataNascimento: Date, var dose: Int , var vacina : Long) {
+data class Utentes(var id: Long = -1, var nome: String, var telefone: String, var contribuinte: Int, var dataNascimento: Date, var dose: Int , var id_vacina : Long,var nomeVacina: String?=null) {
     fun toContentValues(): ContentValues {
         val valores = ContentValues().apply {
             put(TabelaUtentes.CAMPO_NOME, nome)
@@ -14,7 +14,7 @@ data class Utentes(var id: Long = -1, var nome: String, var telefone: String, va
             put(TabelaUtentes.CAMPO_CONTRIBUINTE, contribuinte)
             put(TabelaUtentes.CAMPO_DATA_NASCIMENTO, dataNascimento.time)
             put(TabelaUtentes.CAMPO_DOSE, dose)
-            put(TabelaUtentes.CAMPO_ID_VACINAS, vacina)
+            put(TabelaUtentes.CAMPO_ID_VACINAS, id_vacina)
         }
 
         return valores
@@ -29,7 +29,7 @@ data class Utentes(var id: Long = -1, var nome: String, var telefone: String, va
             val colDataNascimento = cursor.getColumnIndex(TabelaUtentes.CAMPO_DATA_NASCIMENTO)
             val colDose = cursor.getColumnIndex(TabelaUtentes.CAMPO_DOSE)
             val colVacina = cursor.getColumnIndex(TabelaUtentes.CAMPO_ID_VACINAS)
-
+            val colNomeVacina = cursor.getColumnIndex(TabelaUtentes.CAMPO_EXTERNO_NOME_VACINA)
 
             val id = cursor.getLong(colId)
             val nome = cursor.getString(colNome)
@@ -38,8 +38,9 @@ data class Utentes(var id: Long = -1, var nome: String, var telefone: String, va
             val dataNascimento = cursor.getLong(colDataNascimento)
             val dose = cursor.getInt(colDose)
             val vacina = cursor.getLong(colVacina)
+            val nomevacina = if (colNomeVacina != -1) cursor.getString(colNomeVacina) else null
 
-            return Utentes(id, nome, telefone, contribuinte, Date(dataNascimento), dose,vacina)
+            return Utentes(id, nome, telefone, contribuinte, Date(dataNascimento), dose,vacina,nomevacina)
         }
     }
 }

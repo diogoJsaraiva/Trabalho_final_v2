@@ -20,6 +20,10 @@ class AdapterUtentes (val fragment: ListaUtentesFragment) : RecyclerView.Adapter
         private val textViewIdade = itemView.findViewById<TextView>(R.id.textViewIdade)
         private val textViewTelefone = itemView.findViewById<TextView>(R.id.textViewTelefone)
         private val textviewContribuinte = itemView.findViewById<TextView>(R.id.textViewContribuinte)
+        private val textviewVacinaSpinner = itemView.findViewById<TextView>(R.id.TextViewVacinaSpinner)
+
+
+
         private lateinit var utentes: Utentes
 
         init {
@@ -34,6 +38,7 @@ class AdapterUtentes (val fragment: ListaUtentesFragment) : RecyclerView.Adapter
             textViewIdade.text = utentes.dataNascimento.toString()
             textViewTelefone.text = utentes.telefone
             textviewContribuinte.text = utentes.contribuinte.toString()
+            textviewVacinaSpinner.text = utentes.nomeVacina
         }
 
         /**

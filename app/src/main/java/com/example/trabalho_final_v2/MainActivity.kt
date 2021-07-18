@@ -33,7 +33,9 @@ class MainActivity : AppCompatActivity() {
         if (menuAtual == R.menu.menu_lista_vacinas) {
             atualizaMenuListaVacinas(false)
         }
-
+        if (menuAtual == R.menu.menu_lista_utentes) {
+            atualizaMenuListaUtentes(false)
+        }
         return true
     }
 
@@ -49,9 +51,10 @@ class MainActivity : AppCompatActivity() {
             else -> when (menuAtual) {
                 R.menu.menu_lista_vacinas -> (DadosApp.fragment as ListaVacinasFragment).processaOpcaoMenu(item)
                 R.menu.menu_nova_vacina -> (DadosApp.fragment as NovaVacinasFragment).processaOpcaoMenu(item)
-                R.menu.menu_lista_utentes -> (DadosApp.fragment as ListaUtentesFragment).processaOpcaoMenu(item)
                 R.menu.menu_eliminar_vacina -> (DadosApp.fragment as EliminaVacinasFragment).processaOpcaoMenu(item)
                 R.menu.menu_alterar_vacina -> (DadosApp.fragment as EditarVacinasFragment).processaOpcaoMenu(item)
+                R.menu.menu_lista_utentes -> (DadosApp.fragment as ListaUtentesFragment).processaOpcaoMenu(item)
+                R.menu.menu_novo_utente -> (DadosApp.fragment as NovoUtentesFragment).processaOpcaoMenu(item)
 
                 else -> false
             }
@@ -67,8 +70,8 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun atualizaMenuListaUtentes(permiteAlterarEliminar: Boolean) {
-        //menu.findItem(R.id.action_eliminar_vacina).setVisible(permiteAlterarEliminar)
-        //menu.findItem(R.id.action_editar_vacina).setVisible(permiteAlterarEliminar)
+        menu.findItem(R.id.action_eliminar_utentes).setVisible(permiteAlterarEliminar)
+        menu.findItem(R.id.action_editar_utentes).setVisible(permiteAlterarEliminar)
 
     }
 }
