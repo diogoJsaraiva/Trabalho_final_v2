@@ -67,7 +67,7 @@ class ListaUtentesFragment  : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
     }
 
     private fun navegaEliminarUtente(){
-        //   findNavController().navigate(R.id.action_Lista_MarcacoesFragment_to_eliminaPessoaFragment)
+        findNavController().navigate(R.id.action_listaUtentesFragment_to_eliminaUtentesFragment)
     }
 
 
