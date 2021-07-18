@@ -29,5 +29,9 @@
     <string name="contribuinte">Contribuinte</string>
     <string name="dose">Dose</string>
     <string name="data_nascimento">data nascimento</string>
+    <string name="menu_main">Menu Main</string>
+    <string name="marca_es">Marcações</string>
+    <string name="data_da_administra_o">Data da Administração</string>
+    <string name="eliminar_marca_o">Eliminar Marcação</string>
 
 </resources>

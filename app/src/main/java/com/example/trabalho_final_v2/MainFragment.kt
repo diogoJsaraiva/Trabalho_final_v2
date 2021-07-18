@@ -29,7 +29,7 @@ class MainFragment : Fragment() {
 
         }
         view.findViewById<Button>(R.id.button_Marcacao).setOnClickListener {
-            //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_mainFragment_to_listaMarcacoesFragment)
 
         }
         view.findViewById<Button>(R.id.button_Vacinas).setOnClickListener {

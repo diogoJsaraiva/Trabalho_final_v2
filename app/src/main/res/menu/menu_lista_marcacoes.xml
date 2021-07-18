@@ -3,25 +3,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_adicionar_vacina"
+        android:id="@+id/action_adicionar_marcacoes"
         android:icon="@android:drawable/ic_input_add"
-        android:title="@string/nova_vacina"
+        android:title="@string/novo_utente"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_editar_vacina"
+        android:id="@+id/action_editar_marcacoes"
         android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/editar_vacina"
+        android:title="@string/editar_utente"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_eliminar_vacina"
+        android:id="@+id/action_eliminar_marcacoes"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/eliminar_vacina"
+        android:title="@string/eliminar_marca_o"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_menu_main"
-        android:orderInCategory="100"
+        android:icon="@android:drawable/ic_menu_delete"
         android:title="@string/menu_main"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

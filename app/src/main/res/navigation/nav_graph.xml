@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_mainFragment_to_listaUtentesFragment"
             app:destination="@id/listaUtentesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_listaMarcacoesFragment"
+            app:destination="@id/listaMarcacoesFragment" />
     </fragment>
     <fragment
         android:id="@+id/listaVacinasFragment"
@@ -52,6 +55,12 @@
         <action
             android:id="@+id/action_listaUtentesFragment_to_eliminaUtentesFragment"
             app:destination="@id/eliminaUtentesFragment" />
+        <action
+            android:id="@+id/action_listaUtentesFragment_to_editarUtentesFragment"
+            app:destination="@id/editarUtentesFragment" />
+        <action
+            android:id="@+id/action_listaUtentesFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/eliminaVacinasFragment"
@@ -87,5 +96,33 @@
         <action
             android:id="@+id/action_eliminaUtentesFragment_to_listaUtentesFragment"
             app:destination="@id/listaUtentesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarUtentesFragment"
+        android:name="com.example.trabalho_final_v2.EditarUtentesFragment"
+        android:label="EditarUtentesFragment" >
+        <action
+            android:id="@+id/action_editarUtentesFragment_to_listaUtentesFragment"
+            app:destination="@id/listaUtentesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaMarcacoesFragment"
+        android:name="com.example.trabalho_final_v2.ListaMarcacoesFragment"
+        android:label="ListaMarcacoesFragment" >
+        <action
+            android:id="@+id/action_listaMarcacoesFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_listaMarcacoesFragment_to_novaMarcacaoFragment"
+            app:destination="@id/novaMarcacaoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/novaMarcacaoFragment"
+        android:name="com.example.trabalho_final_v2.NovaMarcacaoFragment"
+        android:label="fragment_nova_marcacao"
+        tools:layout="@layout/fragment_nova_marcacao" >
+        <action
+            android:id="@+id/action_novaMarcacaoFragment_to_listaMarcacoesFragment"
+            app:destination="@id/listaMarcacoesFragment" />
     </fragment>
 </navigation>

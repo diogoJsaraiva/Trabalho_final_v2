@@ -1,6 +1,7 @@
 package com.example.trabalho_final_v2
 
 import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -12,11 +13,9 @@ import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import java.util.*
-import android.widget.Spinner
 
-class NovoUtentesFragment: Fragment(), LoaderManager.LoaderCallbacks<Cursor>  {
+class EditarUtentesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>  {
 
     private lateinit var editTextNome: EditText
     private lateinit var editTextTelefone: EditText
@@ -29,10 +28,10 @@ class NovoUtentesFragment: Fragment(), LoaderManager.LoaderCallbacks<Cursor>  {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         DadosApp.fragment= this
-        (activity as MainActivity).menuAtual = R.menu.menu_novo_utente
+        (activity as MainActivity).menuAtual = R.menu.menu_altera_utente
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_novo_utentes, container, false)
+        return inflater.inflate(R.layout.fragment_editar_utentes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,13 +44,23 @@ class NovoUtentesFragment: Fragment(), LoaderManager.LoaderCallbacks<Cursor>  {
         calendarViewDataNascimento = view.findViewById(R.id.calendarViewDataNascimento)
         spinnerVacinas =view.findViewById(R.id.spinnerUtentes)
 
+        editTextNome.setText(DadosApp.utentesSelecionado!!.nome)
+        val telefone = "Telefone: ${DadosApp.utentesSelecionado!!.dose.toString()}"
+        editTextTelefone.setText(telefone)
+        val contribuinte = "Contribuinte: ${DadosApp.utentesSelecionado!!.dose.toString()}"
+        editTextContribuinte.setText(contribuinte)
+        val dose = "Dose: ${DadosApp.utentesSelecionado!!.dose.toString()}"
+        editTextDose.setText(dose)
+        //calendarViewDataNascimento.setDate(DadosApp.utentesSelecionado!!.dataNascimento.toString().toLong())
+
+
         loaderManager.initLoader(ID_LOADER_MANAGER_VACINAS,null,this)
 
     }
 
 
     fun navegaListaUtentes(){
-        findNavController().navigate(R.id.action_novoUtentesFragment_to_listaUtentesFragment)
+        findNavController().navigate(R.id.action_editarUtentesFragment_to_listaUtentesFragment)
     }
 
     fun guardar(){
@@ -85,45 +94,57 @@ class NovoUtentesFragment: Fragment(), LoaderManager.LoaderCallbacks<Cursor>  {
         }
         val idVacina = spinnerVacinas.selectedItemId
 
+
+
         val dataNascimento = calendarViewDataNascimento.date
 
-        val utente = Utentes(nome = nome, telefone = telefone, dose = dose, contribuinte = contribuinte, dataNascimento = Date(dataNascimento),id_vacina = idVacina)
+        DadosApp.utentesSelecionado!!.nome = nome
+        DadosApp.utentesSelecionado!!.dose = dose
+        DadosApp.utentesSelecionado!!.dataNascimento = Date(dataNascimento)
+        DadosApp.utentesSelecionado!!.contribuinte = contribuinte
+        DadosApp.utentesSelecionado!!.telefone = telefone
+        DadosApp.utentesSelecionado!!.id_vacina = idVacina
 
 
 
-        val uri = activity?.contentResolver?.insert(
+        val uriUtentes = Uri.withAppendedPath(
             ContentProviderMarcacoes.ENDERECO_UTENTES,
-            utente.toContentValues()
+            DadosApp.utentesSelecionado!!.id.toString()
         )
 
-        if (uri == null) {
-            Snackbar.make(
-                editTextNome,
-                "erro inserir utente",
-                Snackbar.LENGTH_LONG
+        val registos = activity?.contentResolver?.update(
+            uriUtentes,
+            DadosApp.utentesSelecionado!!.toContentValues(),
+            null,
+            null
+        )
+
+        if (registos != 1){
+            Toast.makeText(
+                requireContext(),
+                "Erro ao alterar Utente",
+                Toast.LENGTH_LONG
             ).show()
             return
         }
-
         Toast.makeText(
             requireContext(),
-            "Inserido com sucesso",
+            "Utente alterado com sucesso",
             Toast.LENGTH_LONG
         ).show()
-        return
         navegaListaUtentes()
 
     }
 
     fun processaOpcaoMenu(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_guardar_novo_utente-> guardar()
-            R.id.action_cancelar_novo_utente-> navegaListaUtentes()
+            R.id.action_guardar_edita_Utente-> guardar()
+            R.id.action_cancelar_edita_Utente-> navegaListaUtentes()
             else -> return false
         }
         return true
     }
-     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         return CursorLoader(
             requireContext(),
             ContentProviderMarcacoes.ENDERECO_VACINAS,
@@ -196,7 +217,15 @@ class NovoUtentesFragment: Fragment(), LoaderManager.LoaderCallbacks<Cursor>  {
      * @param loader The Loader that is being reset.
      */
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        atualizaSpinnerVacinas(null)
+        val idVacina = DadosApp.utentesSelecionado!!.id_vacina
+
+        val ultimaVacina = spinnerVacinas.count - 1
+        for (i in 0..ultimaVacina){
+            if (idVacina == spinnerVacinas.getItemIdAtPosition(i)){
+                spinnerVacinas.setSelection(i)
+                return
+            }
+        }
     }
     private fun atualizaSpinnerVacinas(data: Cursor?) {
         spinnerVacinas.adapter = SimpleCursorAdapter(

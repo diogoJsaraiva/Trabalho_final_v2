@@ -70,6 +70,9 @@ class ListaVacinasFragment  : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
         findNavController().navigate(R.id.action_listaVacinasFragment_to_eliminaVacinasFragment)
     }
 
+    private fun navegaMenu(){
+        findNavController().navigate(R.id.action_listaVacinasFragment_to_mainFragment)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -81,6 +84,7 @@ class ListaVacinasFragment  : Fragment(), LoaderManager.LoaderCallbacks<Cursor> 
             R.id.action_adicionar_vacina -> navegaNovaVacina()
             R.id.action_editar_vacina -> navegaAlterarVacina()
             R.id.action_eliminar_vacina -> navegaEliminarVacina()
+            R.id.action_menu_main -> navegaMenu()
             else -> return false
         }
         return true

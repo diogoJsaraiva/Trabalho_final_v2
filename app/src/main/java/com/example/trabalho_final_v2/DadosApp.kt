@@ -8,5 +8,6 @@ class DadosApp {
         lateinit var fragment: Fragment
         var vacinasSelecionado : Vacinas? = null
         var utentesSelecionado : Utentes? = null
+        var marcacoesSelecionado : Marcacoes? = null
     }
 }

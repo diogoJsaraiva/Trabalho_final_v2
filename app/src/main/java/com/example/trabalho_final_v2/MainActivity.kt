@@ -36,6 +36,10 @@ class MainActivity : AppCompatActivity() {
         if (menuAtual == R.menu.menu_lista_utentes) {
             atualizaMenuListaUtentes(false)
         }
+        if (menuAtual == R.menu.menu_lista_marcacoes) {
+            atualizaMenuListaMarcacoes(false)
+        }
+
         return true
     }
 
@@ -56,6 +60,9 @@ class MainActivity : AppCompatActivity() {
                 R.menu.menu_lista_utentes -> (DadosApp.fragment as ListaUtentesFragment).processaOpcaoMenu(item)
                 R.menu.menu_novo_utente -> (DadosApp.fragment as NovoUtentesFragment).processaOpcaoMenu(item)
                 R.menu.menu_eliminar_utente -> (DadosApp.fragment as EliminaUtentesFragment).processaOpcaoMenu(item)
+                R.menu.menu_altera_utente -> (DadosApp.fragment as EditarUtentesFragment).processaOpcaoMenu(item)
+                R.menu.menu_lista_marcacoes -> (DadosApp.fragment as ListaMarcacoesFragment).processaOpcaoMenu(item)
+                R.menu.menu_nova_marcacao -> (DadosApp.fragment as NovaMarcacaoFragment).processaOpcaoMenu(item)
 
                 else -> false
             }
@@ -73,6 +80,11 @@ class MainActivity : AppCompatActivity() {
     fun atualizaMenuListaUtentes(permiteAlterarEliminar: Boolean) {
         menu.findItem(R.id.action_eliminar_utentes).setVisible(permiteAlterarEliminar)
         menu.findItem(R.id.action_editar_utentes).setVisible(permiteAlterarEliminar)
+
+    }
+    fun atualizaMenuListaMarcacoes(permiteAlterarEliminar: Boolean) {
+        menu.findItem(R.id.action_eliminar_marcacoes).setVisible(permiteAlterarEliminar)
+        menu.findItem(R.id.action_editar_marcacoes).setVisible(permiteAlterarEliminar)
 
     }
 }

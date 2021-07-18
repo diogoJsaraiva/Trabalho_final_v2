@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class AdapterUtentes (val fragment: ListaUtentesFragment) : RecyclerView.Adapter<AdapterUtentes.ViewHolderUtentes>()  {
+class AdapterMarcacoes (val fragment: ListaMarcacoesFragment) : RecyclerView.Adapter<AdapterMarcacoes.ViewHolderMarcacoes>()  {
     public var cursor: Cursor? = null
         get() = field
         set(value) {
@@ -14,36 +14,31 @@ class AdapterUtentes (val fragment: ListaUtentesFragment) : RecyclerView.Adapter
             notifyDataSetChanged()
         }
 
-    class ViewHolderUtentes(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        private val textViewNome = itemView.findViewById<TextView>(R.id.textViewNome)
+    class ViewHolderMarcacoes(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+
+        private val textViewDataAdministracao = itemView.findViewById<TextView>(R.id.textViewDataAdministracao)
         private val textViewDose = itemView.findViewById<TextView>(R.id.textViewDose)
-        private val textViewIdade = itemView.findViewById<TextView>(R.id.textViewIdade)
-        private val textViewTelefone = itemView.findViewById<TextView>(R.id.textViewTelefone)
-        private val textviewContribuinte = itemView.findViewById<TextView>(R.id.textViewContribuinte)
-        private val textviewVacinaSpinner = itemView.findViewById<TextView>(R.id.TextViewVacina)
+
+        private val textviewVacinaSpinner = itemView.findViewById<TextView>(R.id.textViewNomeSpinner)
 
 
 
-        private lateinit var utentes: Utentes
+
+
+        private lateinit var marcacoes: Marcacoes
 
         init {
             itemView.setOnClickListener(this)
         }
 
-        fun atualizaUtentes(utentes: Utentes) {
-            this.utentes = utentes
-
-            textViewNome.text = utentes.nome
-            val dose = "Dose: ${utentes.dose.toString()}"
+        fun atualizaVacinas(marcacoes: Marcacoes) {
+            this.marcacoes = marcacoes
+            val data = "Data Administração: ${marcacoes.data.toString()}"
+            textViewDataAdministracao.text = data
+            val dose = "Proxima dose: ${marcacoes.dose.toString()}"
             textViewDose.text = dose
-            val data = "Data: ${utentes.dataNascimento.toString()}"
-            textViewIdade.text = data
-            val telefone = "Telefone: ${utentes.telefone.toString()}"
-            textViewTelefone.text =telefone
-            val contribuinte = "Contribuionte: ${utentes.contribuinte.toString()}"
-            textviewContribuinte.text = contribuinte
-            val vacina = "Vacina: ${utentes.nomeVacina}"
-            textviewVacinaSpinner.text = vacina
+            textviewVacinaSpinner.text = marcacoes.nomeUtente
+
         }
 
         /**
@@ -59,8 +54,8 @@ class AdapterUtentes (val fragment: ListaUtentesFragment) : RecyclerView.Adapter
         private fun seleciona() {
             selecionado = this
             itemView.setBackgroundResource(R.color.cor_selecao)
-            DadosApp.utentesSelecionado = utentes
-            DadosApp.activity.atualizaMenuListaUtentes(true)
+            DadosApp.marcacoesSelecionado = marcacoes
+            DadosApp.activity.atualizaMenuListaMarcacoes(true)
         }
 
         private fun desSeleciona() {
@@ -71,7 +66,7 @@ class AdapterUtentes (val fragment: ListaUtentesFragment) : RecyclerView.Adapter
 
 
         companion object {
-            var selecionado : ViewHolderUtentes? = null
+            var selecionado : ViewHolderMarcacoes? = null
         }
     }
 
@@ -98,10 +93,10 @@ class AdapterUtentes (val fragment: ListaUtentesFragment) : RecyclerView.Adapter
      * @see .getItemViewType
      * @see .onBindViewHolder
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderUtentes {
-        val itemUtentes = fragment.layoutInflater.inflate(R.layout.item_utentes, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderMarcacoes {
+        val itemMarcacoes = fragment.layoutInflater.inflate(R.layout.item_marcacoes, parent, false)
 
-        return ViewHolderUtentes(itemUtentes)
+        return ViewHolderMarcacoes(itemMarcacoes)
     }
 
     /**
@@ -125,9 +120,9 @@ class AdapterUtentes (val fragment: ListaUtentesFragment) : RecyclerView.Adapter
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: ViewHolderUtentes, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderMarcacoes, position: Int) {
         cursor!!.moveToPosition(position)
-        holder.atualizaUtentes(Utentes.fromCursor(cursor!!))
+        holder.atualizaVacinas(Marcacoes.fromCursor(cursor!!))
     }
 
     /**

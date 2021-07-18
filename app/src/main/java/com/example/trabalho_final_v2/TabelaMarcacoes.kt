@@ -31,7 +31,45 @@ class TabelaMarcacoes(db: SQLiteDatabase) : BaseColumns {
         having: String?,
         orderBy: String?
     ): Cursor? {
-        return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy)
+        val ultimaColuna = columns.size - 1
+
+        var posColNomeCategoria = -1 // -1 indica que a coluna não foi pedida
+        for (i in 0..ultimaColuna) {
+            if (columns[i] == CAMPO_EXTERNO_NOME_UTENTE) {
+                posColNomeCategoria = i
+                break
+            }
+        }
+
+        if (posColNomeCategoria == -1) {
+            return db.query(TabelaUtentes.NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy)
+        }
+
+        var colunas = ""
+        for (i in 0..ultimaColuna) {
+            if (i > 0) colunas += ","
+
+            colunas += if (i == posColNomeCategoria) {
+                "${TabelaUtentes.NOME_TABELA}.${TabelaUtentes.CAMPO_NOME} AS ${CAMPO_EXTERNO_NOME_UTENTE}"
+            } else {
+                "$NOME_TABELA.${columns[i]}"
+            }
+        }
+
+        val tabelas = "$NOME_TABELA INNER JOIN ${TabelaUtentes.NOME_TABELA} ON ${TabelaUtentes.NOME_TABELA}.${BaseColumns._ID}=${CAMPO_ID_UTENTES}"
+
+        var sql = "SELECT $colunas FROM $tabelas"
+
+        if (selection != null) sql += " WHERE $selection"
+
+        if (groupBy != null) {
+            sql += " GROUP BY $groupBy"
+            if (having != null) " HAVING $having"
+        }
+
+        if (orderBy != null) sql += " ORDER BY ${NOME_TABELA}.$orderBy"
+
+        return db.rawQuery(sql, selectionArgs)
     }
 
     companion object{
@@ -39,10 +77,10 @@ class TabelaMarcacoes(db: SQLiteDatabase) : BaseColumns {
         const val CAMPO_DATA = "data_administracao"
         const val CAMPO_DOSE = "dose"
         const val CAMPO_ID_UTENTES = "id_pessoa"
+        const val CAMPO_EXTERNO_NOME_UTENTE = "nomeutente"
 
 
-
-        val TODOS_CAMPOS =arrayOf(BaseColumns._ID, CAMPO_DATA,CAMPO_ID_UTENTES, CAMPO_DOSE)
+        val TODOS_CAMPOS =arrayOf(BaseColumns._ID, CAMPO_DATA,CAMPO_ID_UTENTES, CAMPO_DOSE,CAMPO_EXTERNO_NOME_UTENTE)
 
     }
 

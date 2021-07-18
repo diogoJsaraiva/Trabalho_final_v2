@@ -5,7 +5,7 @@ import android.database.Cursor
 import android.provider.BaseColumns
 import java.util.*
 
-data class Marcacoes (var id: Long = -1, var data: Date, var dose: Int ,var idUtentes: Long){
+data class Marcacoes (var id: Long = -1, var data: Date, var dose: Int ,var idUtentes: Long,var nomeUtente: String?=null){
     fun toContentValues(): ContentValues {
         val valores = ContentValues().apply {
             put(TabelaMarcacoes.CAMPO_DATA, data.time)
@@ -24,13 +24,16 @@ data class Marcacoes (var id: Long = -1, var data: Date, var dose: Int ,var idUt
             val colIdUtentes= cursor.getColumnIndex(TabelaMarcacoes.CAMPO_ID_UTENTES)
             val colIdDose = cursor.getColumnIndex(TabelaMarcacoes.CAMPO_DOSE)
 
+            val colNomeUtentes = cursor.getColumnIndex(TabelaMarcacoes.CAMPO_EXTERNO_NOME_UTENTE)
+
             val id = cursor.getLong(colId)
             val data = cursor.getLong(colData)
             val dose = cursor.getInt(colIdDose)
             val idUtentes = cursor.getLong(colIdUtentes)
+            val nomeutente = if (colNomeUtentes != -1) cursor.getString(colNomeUtentes) else null
 
 
-            return Marcacoes(id, Date(data),dose, idUtentes)
+            return Marcacoes(id, Date(data),dose, idUtentes, nomeutente)
         }
     }
 }

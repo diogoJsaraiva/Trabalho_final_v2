@@ -45,8 +45,10 @@ class EliminaUtentesFragment: Fragment() {
         textViewDataVacina =view.findViewById(R.id.TextViewVacina)
 
         textViewNome.setText(DadosApp.utentesSelecionado!!.nome)
-        textViewTelefone.setText(DadosApp.utentesSelecionado!!.telefone)
-        textViewContribuinte.setText(DadosApp.utentesSelecionado!!.contribuinte.toString())
+        val telefone = "Telefone: ${DadosApp.utentesSelecionado!!.dose.toString()}"
+        textViewTelefone.setText(telefone)
+        val contribuinte = "Contribuinte: ${DadosApp.utentesSelecionado!!.dose.toString()}"
+        textViewContribuinte.setText(contribuinte)
         val dose = "Dose: ${DadosApp.utentesSelecionado!!.dose.toString()}"
         textViewDose.setText(dose)
         textViewDataNascimento.setText(DadosApp.utentesSelecionado!!.dataNascimento.toString())
