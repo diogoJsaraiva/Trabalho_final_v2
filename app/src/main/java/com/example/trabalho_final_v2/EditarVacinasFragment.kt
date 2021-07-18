@@ -41,7 +41,7 @@ class EditarVacinasFragment : Fragment(){
 
 
 
-        editTextNome.setText(DadosApp.vacinasSelecionado!!.nomeVacina)
+        editTextNome.setText(DadosApp.vacinasSelecionado!!.nomevacina)
 
 
     }
@@ -70,7 +70,7 @@ class EditarVacinasFragment : Fragment(){
 
 
 
-        DadosApp.vacinasSelecionado!!.nomeVacina = nome
+        DadosApp.vacinasSelecionado!!.nomevacina = nome
 
 
         val urivacinas= Uri.withAppendedPath(

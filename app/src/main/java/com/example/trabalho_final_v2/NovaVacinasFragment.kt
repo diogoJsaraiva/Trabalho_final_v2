@@ -48,7 +48,7 @@ class NovaVacinasFragment : Fragment() {
             editTextVacina.requestFocus()
             return
         }
-        val vacinas = Vacinas(nomeVacina= vacina)
+        val vacinas = Vacinas(nomevacina= vacina)
 
         val uri = activity?.contentResolver?.insert(
             ContentProviderMarcacoes.ENDERECO_VACINAS,

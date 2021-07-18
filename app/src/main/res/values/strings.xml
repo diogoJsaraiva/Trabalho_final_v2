@@ -25,4 +25,9 @@
     <string name="eliminar_utente">eliminar utente</string>
     <string name="nome">Nome</string>
 
+    <string name="telefone">telefone</string>
+    <string name="contribuinte">Contribuinte</string>
+    <string name="dose">Dose</string>
+    <string name="data_nascimento">data nascimento</string>
+
 </resources>

@@ -34,7 +34,7 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     textViewNome = view.findViewById(R.id.textViewNomeElimina)
 
 
-    textViewNome.setText(DadosApp.vacinasSelecionado!!.nomeVacina)
+    textViewNome.setText(DadosApp.vacinasSelecionado!!.nomevacina)
 
 
 }

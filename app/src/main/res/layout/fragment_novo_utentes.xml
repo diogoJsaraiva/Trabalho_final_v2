@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NovoUtentesFragment" >
+    tools:context=".NovoUtentesFragment">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margem_campos"
+        android:layout_marginLeft="@dimen/margem_campos"
+        android:layout_marginTop="@dimen/margem_campos"
+        android:layout_marginEnd="@dimen/margem_campos"
+        android:layout_marginRight="@dimen/margem_campos"
+        android:text="@string/vacinas" />
 
     <Spinner
         android:id="@+id/spinnerVacinas"
@@ -32,7 +42,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="telefone">
+            android:hint="@string/telefone">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextTelefone"
@@ -45,7 +55,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Contribuinte">
+                android:hint="@string/contribuinte">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editTextContruibuinte"
@@ -53,12 +63,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margem_campos"
                     android:hint=""
-                    android:inputType="textEmailAddress" />
+                    android:inputType="number" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Dose">
+                    android:hint="@string/dose">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editTextDose"
@@ -66,14 +76,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margem_campos"
                         android:hint=""
-                        android:inputType="textPostalAddress" />
+                        android:inputType="number" />
 
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margem_campos"
-                        android:text="data nascimento" />
+                        android:text="@string/data_nascimento" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.textfield.TextInputLayout>

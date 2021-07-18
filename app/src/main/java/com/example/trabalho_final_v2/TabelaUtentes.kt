@@ -30,46 +30,44 @@ class TabelaUtentes (db: SQLiteDatabase) : BaseColumns {
         having: String?,
         orderBy: String?
     ): Cursor? {
-        val ultimaColuna = columns.size -1
+        val ultimaColuna = columns.size - 1
 
-        var posCampoNomeCidade = -1 //-1 indica que não foi pedido
-        for (i in 0..ultimaColuna){
-            if (columns[i] == CAMPO_EXTERNO_NOME_VACINA){
-                posCampoNomeCidade = i
+        var posColNomeCategoria = -1 // -1 indica que a coluna não foi pedida
+        for (i in 0..ultimaColuna) {
+            if (columns[i] == CAMPO_EXTERNO_NOME_VACINA) {
+                posColNomeCategoria = i
                 break
             }
         }
 
-        if (posCampoNomeCidade == -1) { // não existem campos externos de outra tabela
+        if (posColNomeCategoria == -1) {
             return db.query(NOME_TABELA, columns, selection, selectionArgs, groupBy, having, orderBy)
         }
 
         var colunas = ""
-        for(i in 0..ultimaColuna){
-            var nomeColuna = if(i == posCampoNomeCidade){
-                "${TabelaVacinas.NOME_TABELA}.${TabelaVacinas.CAMPO_NOME} AS $CAMPO_EXTERNO_NOME_VACINA"
-            }else {
-                "$NOME_TABELA.${columns[i]}"
-            }
-
+        for (i in 0..ultimaColuna) {
             if (i > 0) colunas += ","
-            colunas += nomeColuna
+
+            colunas += if (i == posColNomeCategoria) {
+                "${TabelaVacinas.NOME_TABELA}.${TabelaVacinas.CAMPO_NOME} AS $CAMPO_EXTERNO_NOME_VACINA"
+            } else {
+                "${NOME_TABELA}.${columns[i]}"
+            }
         }
-        val tabelas = "$NOME_TABELA INNER JOIN ${TabelaVacinas.NOME_TABELA} ON ${TabelaVacinas.NOME_TABELA}.${BaseColumns._ID} = $NOME_TABELA.$CAMPO_ID_VACINAS"
 
-        var sqlAdicional = ""
+        val tabelas = "$NOME_TABELA INNER JOIN ${TabelaVacinas.NOME_TABELA} ON ${TabelaVacinas.NOME_TABELA}.${BaseColumns._ID}=$CAMPO_ID_VACINAS"
 
-        if (selection != null) sqlAdicional += " WHERE $selection"
+        var sql = "SELECT $colunas FROM $tabelas"
+
+        if (selection != null) sql += " WHERE $selection"
 
         if (groupBy != null) {
-            sqlAdicional += " GROUP BY $groupBy"
-            if (having != null) sqlAdicional += " HAVING $having"
-        }
-        if (orderBy != null){
-            sqlAdicional += " ORDER BY $orderBy"
+            sql += " GROUP BY $groupBy"
+            if (having != null) " HAVING $having"
         }
 
-        val sql = "SELECT $colunas FROM $tabelas$sqlAdicional"
+        if (orderBy != null) sql += " ORDER BY $orderBy"
+
         return db.rawQuery(sql, selectionArgs)
     }
 
@@ -81,7 +79,7 @@ class TabelaUtentes (db: SQLiteDatabase) : BaseColumns {
         const val CAMPO_DATA_NASCIMENTO = "datanascimento"
         const val CAMPO_DOSE = "dose"
         const val CAMPO_ID_VACINAS = "id_vacina"
-        const val CAMPO_EXTERNO_NOME_VACINA = "nome_vacina"
+        const val CAMPO_EXTERNO_NOME_VACINA = "nomevacina"
 
         val TODOS_CAMPOS =arrayOf(BaseColumns._ID, CAMPO_NOME, CAMPO_TELEFONE, CAMPO_CONTRIBUINTE,CAMPO_DATA_NASCIMENTO, CAMPO_DOSE,CAMPO_ID_VACINAS)
     }

@@ -14,6 +14,7 @@ import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
+import android.widget.Spinner
 
 class NovoUtentesFragment: Fragment(), LoaderManager.LoaderCallbacks<Cursor>  {
 
@@ -44,7 +45,7 @@ class NovoUtentesFragment: Fragment(), LoaderManager.LoaderCallbacks<Cursor>  {
         calendarViewDataNascimento = view.findViewById(R.id.calendarViewDataNascimento)
         spinnerVacinas =view.findViewById(R.id.spinnerVacinas)
 
-        loaderManager.initLoader(NovoUtentesFragment.ID_LOADER_MANAGER_VACINAS,null,this)
+        loaderManager.initLoader(ID_LOADER_MANAGER_VACINAS,null,this)
 
     }
 

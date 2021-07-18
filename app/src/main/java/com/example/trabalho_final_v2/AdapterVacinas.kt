@@ -25,7 +25,7 @@ class AdapterVacinas(val fragment: ListaVacinasFragment) : RecyclerView.Adapter<
         fun atualizaVacinas(vacinas: Vacinas) {
             this.vacinas = vacinas
 
-            textViewNome.text = vacinas.nomeVacina
+            textViewNome.text = vacinas.nomevacina
 
         }
 
