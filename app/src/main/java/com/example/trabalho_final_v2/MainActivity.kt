@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> when (menuAtual) {
-                R.menu.menu_main -> (DadosApp.fragment as MainFragment).processaOpcaoMenu(item)
 
                 R.menu.menu_lista_vacinas -> (DadosApp.fragment as ListaVacinasFragment).processaOpcaoMenu(item)
                 R.menu.menu_nova_vacina -> (DadosApp.fragment as NovaVacinasFragment).processaOpcaoMenu(item)

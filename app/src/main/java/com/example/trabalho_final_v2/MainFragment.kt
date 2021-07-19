@@ -1,12 +1,11 @@
 package com.example.trabalho_final_v2
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.navigation.fragment.findNavController
 
 /**
@@ -19,6 +18,7 @@ class MainFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        (activity as MainActivity).menuAtual = R.menu.menu_main
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -40,11 +40,6 @@ class MainFragment : Fragment() {
 
     }
 
-    fun processaOpcaoMenu(item: MenuItem): Boolean {
-        when (item.itemId) {
 
-            else -> return false
-        }
-        return true
-    }
+
 }
