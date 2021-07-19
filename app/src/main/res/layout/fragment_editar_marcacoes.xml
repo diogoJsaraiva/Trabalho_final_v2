@@ -36,6 +36,7 @@
             android:id="@+id/editTextDose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margem_campos"
             android:hint="@string/dose"
             android:inputType="number" />
 
@@ -44,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margem_campos"
-            android:text="@string/data_da_administra_o" />
+            android:text="@string/data_nascimento" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

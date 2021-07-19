@@ -42,10 +42,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="288dp"
-        android:layout_marginRight="288dp"
-        android:textColor="@color/cor_destaque"
+        android:textColor="@color/design_default_color_error"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDose"
-        tools:text="@string/data_nascimento"/>
+        tools:text="@string/data_nascimento" />
 </androidx.constraintlayout.widget.ConstraintLayout>
