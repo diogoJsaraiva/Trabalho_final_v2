@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             else -> when (menuAtual) {
+                R.menu.menu_main -> (DadosApp.fragment as MainFragment).processaOpcaoMenu(item)
+
                 R.menu.menu_lista_vacinas -> (DadosApp.fragment as ListaVacinasFragment).processaOpcaoMenu(item)
                 R.menu.menu_nova_vacina -> (DadosApp.fragment as NovaVacinasFragment).processaOpcaoMenu(item)
                 R.menu.menu_eliminar_vacina -> (DadosApp.fragment as EliminaVacinasFragment).processaOpcaoMenu(item)
@@ -63,6 +65,8 @@ class MainActivity : AppCompatActivity() {
                 R.menu.menu_altera_utente -> (DadosApp.fragment as EditarUtentesFragment).processaOpcaoMenu(item)
                 R.menu.menu_lista_marcacoes -> (DadosApp.fragment as ListaMarcacoesFragment).processaOpcaoMenu(item)
                 R.menu.menu_nova_marcacao -> (DadosApp.fragment as NovaMarcacaoFragment).processaOpcaoMenu(item)
+                R.menu.menu_eliminar_marcacao -> (DadosApp.fragment as EliminaMarcacaoFragment).processaOpcaoMenu(item)
+                R.menu.menu_altera_marcacao -> (DadosApp.fragment as EditarMarcacaoFragment).processaOpcaoMenu(item)
 
                 else -> false
             }

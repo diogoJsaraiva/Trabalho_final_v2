@@ -115,6 +115,12 @@
         <action
             android:id="@+id/action_listaMarcacoesFragment_to_novaMarcacaoFragment"
             app:destination="@id/novaMarcacaoFragment" />
+        <action
+            android:id="@+id/action_listaMarcacoesFragment_to_eliminaMarcacaoFragment"
+            app:destination="@id/eliminaMarcacaoFragment" />
+        <action
+            android:id="@+id/action_listaMarcacoesFragment_to_editarMarcacaoFragment"
+            app:destination="@id/editarMarcacaoFragment" />
     </fragment>
     <fragment
         android:id="@+id/novaMarcacaoFragment"
@@ -123,6 +129,22 @@
         tools:layout="@layout/fragment_nova_marcacao" >
         <action
             android:id="@+id/action_novaMarcacaoFragment_to_listaMarcacoesFragment"
+            app:destination="@id/listaMarcacoesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eliminaMarcacaoFragment"
+        android:name="com.example.trabalho_final_v2.EliminaMarcacaoFragment"
+        android:label="EliminaMarcacaoFragment" >
+        <action
+            android:id="@+id/action_eliminaMarcacaoFragment_to_listaMarcacoesFragment"
+            app:destination="@id/listaMarcacoesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editarMarcacaoFragment"
+        android:name="com.example.trabalho_final_v2.EditarMarcacaoFragment"
+        android:label="EditarMarcacaoFragment" >
+        <action
+            android:id="@+id/action_editarMarcacaoFragment_to_listaMarcacoesFragment"
             app:destination="@id/listaMarcacoesFragment" />
     </fragment>
 </navigation>

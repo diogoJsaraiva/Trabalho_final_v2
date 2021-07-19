@@ -31,7 +31,7 @@ class AdapterMarcacoes (val fragment: ListaMarcacoesFragment) : RecyclerView.Ada
             itemView.setOnClickListener(this)
         }
 
-        fun atualizaVacinas(marcacoes: Marcacoes) {
+        fun atualizaMarcacoes(marcacoes: Marcacoes) {
             this.marcacoes = marcacoes
             val data = "Data Administração: ${marcacoes.data.toString()}"
             textViewDataAdministracao.text = data
@@ -122,7 +122,7 @@ class AdapterMarcacoes (val fragment: ListaMarcacoesFragment) : RecyclerView.Ada
      */
     override fun onBindViewHolder(holder: ViewHolderMarcacoes, position: Int) {
         cursor!!.moveToPosition(position)
-        holder.atualizaVacinas(Marcacoes.fromCursor(cursor!!))
+        holder.atualizaMarcacoes(Marcacoes.fromCursor(cursor!!))
     }
 
     /**

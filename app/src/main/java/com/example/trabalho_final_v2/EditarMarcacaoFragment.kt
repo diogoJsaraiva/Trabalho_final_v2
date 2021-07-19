@@ -1,109 +1,125 @@
 package com.example.trabalho_final_v2
 
 import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 
-class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
+class EditarMarcacaoFragment: Fragment(), LoaderManager.LoaderCallbacks<Cursor>  {
 
-    private var adapterMarcacoes : AdapterMarcacoes? = null
+    private lateinit var editTextDose: EditText
+    private lateinit var calendarViewAdministracao: CalendarView
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
+    private lateinit var spinnerUtentes: Spinner
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        DadosApp.fragment= this
+        (activity as MainActivity).menuAtual = R.menu.menu_altera_marcacao
+
         // Inflate the layout for this fragment
-
-        DadosApp.fragment = this
-
-        (activity as MainActivity).menuAtual = R.menu.menu_lista_marcacoes
-
-        return inflater.inflate(R.layout.fragment_marcacoes_lista, container, false)
+        return inflater.inflate(R.layout.fragment_editar_marcacoes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerViewMarcacoes= view.findViewById<RecyclerView>(R.id.recyclerViewMarcacoes)
-        adapterMarcacoes= AdapterMarcacoes(this)
-
-        recyclerViewMarcacoes.adapter = adapterMarcacoes
-        recyclerViewMarcacoes.layoutManager = LinearLayoutManager(requireContext())
+        editTextDose = view.findViewById(R.id.editTextDose)
+        calendarViewAdministracao = view.findViewById(R.id.calendarViewAdministracao)
+        spinnerUtentes =view.findViewById(R.id.spinnerUtentes)
 
 
+        editTextDose.setText(DadosApp.marcacoesSelecionado!!.dose.toString())
 
-        LoaderManager.getInstance(this)
-            .initLoader(ID_LOADER_MANAGER_MARCACOES, null, this)
+        //calendarViewAdministracao.setDate(DadosApp.marcacoesSelecionado!!.data.toString().toLong())
+
+
+        loaderManager.initLoader(ID_LOADER_MANAGER_UTENTES,null,this)
 
     }
 
-    fun navegaNovoMarcacoes(){
-        findNavController().navigate(R.id.action_listaMarcacoesFragment_to_novaMarcacaoFragment)
-    }
-    private fun navegaAlterarMarcacoes(){
-        findNavController().navigate(R.id.action_listaMarcacoesFragment_to_editarMarcacaoFragment)
+
+    fun navegaListaMarcacao(){
+        findNavController().navigate(R.id.action_editarMarcacaoFragment_to_listaMarcacoesFragment)
     }
 
-    private fun navegaEliminarMarcacoes(){
-        findNavController().navigate(R.id.action_listaMarcacoesFragment_to_eliminaMarcacaoFragment)
-    }
-    private fun navegaMenu(){
-        findNavController().navigate(R.id.action_listaMarcacoesFragment_to_mainFragment)
-    }
+    fun guardar(){
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+
+        val dose = editTextDose.text.toString().toInt()
+        if (dose == null) {
+            editTextDose.setError("Preencha a dose")
+            editTextDose.requestFocus()
+            return
+        }
+        val idutentes = spinnerUtentes.selectedItemId
+
+
+        val dataAdm = calendarViewAdministracao.date
+
+
+        DadosApp.marcacoesSelecionado!!.dose = dose
+        DadosApp.marcacoesSelecionado!!.data = Date(dataAdm)
+        DadosApp.marcacoesSelecionado!!.idUtentes = idutentes
+
+
+
+        val uriUtentes = Uri.withAppendedPath(
+            ContentProviderMarcacoes.ENDERECO_MARCACOES,
+            DadosApp.marcacoesSelecionado!!.id.toString()
+        )
+
+        val registos = activity?.contentResolver?.update(
+            uriUtentes,
+            DadosApp.marcacoesSelecionado!!.toContentValues(),
+            null,
+            null
+        )
+
+        if (registos != 1){
+            Toast.makeText(
+                requireContext(),
+                "Erro ao alterar Utente",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+        Toast.makeText(
+            requireContext(),
+            "Utente alterado com sucesso",
+            Toast.LENGTH_LONG
+        ).show()
+        navegaListaMarcacao()
 
     }
 
     fun processaOpcaoMenu(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_adicionar_marcacoes -> navegaNovoMarcacoes()
-            R.id.action_editar_marcacoes -> navegaAlterarMarcacoes()
-            R.id.action_eliminar_marcacoes -> navegaEliminarMarcacoes()
-            R.id.action_menu_main -> navegaMenu()
+            R.id.action_guardar_edita_marcacao-> guardar()
+            R.id.action_cancelar_edita_marcacao-> navegaListaMarcacao()
             else -> return false
         }
         return true
     }
-
-    /**
-     * Instantiate and return a new Loader for the given ID.
-     *
-     *
-     * This will always be called from the process's main thread.
-     *
-     * @param id The ID whose loader is to be created.
-     * @param args Any arguments supplied by the caller.
-     * @return Return a new Loader instance that is ready to start loading.
-     */
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
         return CursorLoader(
             requireContext(),
-            ContentProviderMarcacoes.ENDERECO_MARCACOES,
-            TabelaMarcacoes.TODOS_CAMPOS,
-            null, null,
-            TabelaMarcacoes.CAMPO_DATA
+            ContentProviderMarcacoes.ENDERECO_UTENTES,
+            TabelaUtentes.TODOS_CAMPOS,
+            null,null,
+            TabelaUtentes.CAMPO_NOME
 
 
 
@@ -154,8 +170,10 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
      * @param data The data generated by the Loader.
      */
     override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-        adapterMarcacoes!!.cursor = data
+        atualizaSpinnerVacinas(data)
     }
+
+
 
     /**
      * Called when a previously created loader is being reset, and thus
@@ -168,18 +186,31 @@ class ListaMarcacoesFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor>
      * @param loader The Loader that is being reset.
      */
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        adapterMarcacoes!!.cursor = null
+        val idVacina = DadosApp.marcacoesSelecionado!!.idUtentes
+
+        val ultimaVacina = spinnerUtentes.count - 1
+        for (i in 0..ultimaVacina){
+            if (idVacina == spinnerUtentes.getItemIdAtPosition(i)){
+                spinnerUtentes.setSelection(i)
+                return
+            }
+        }
     }
+    private fun atualizaSpinnerVacinas(data: Cursor?) {
+        spinnerUtentes.adapter = SimpleCursorAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            data,
+            arrayOf(TabelaUtentes.CAMPO_NOME),
+            intArrayOf(android.R.id.text1),
+            0
 
 
+        )
 
-
-
-    companion object {
-        const val ID_LOADER_MANAGER_MARCACOES = 0
     }
-
-
-
+    companion object{
+        const val ID_LOADER_MANAGER_UTENTES= 0
+    }
 
 }

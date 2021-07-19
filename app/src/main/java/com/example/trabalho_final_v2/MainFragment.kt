@@ -3,6 +3,7 @@ package com.example.trabalho_final_v2
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -36,5 +37,14 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_listaVacinasFragment)
 
         }
+
+    }
+
+    fun processaOpcaoMenu(item: MenuItem): Boolean {
+        when (item.itemId) {
+
+            else -> return false
+        }
+        return true
     }
 }
